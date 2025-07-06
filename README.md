@@ -48,13 +48,13 @@ b. Thành phần kỹ thuật
 
 - RSA 1024-bit + OAEP:
 
-RSA được dùng để:
+ RSA được dùng để:
 
   + Mã hóa session key (Triple DES key).
   
   + Ký số metadata sau khi băm bằng SHA-512.
-
-Sử dụng OAEP + SHA-512 tăng cường chống phân tích.
+ 
+ Sử dụng OAEP + SHA-512 tăng cường chống phân tích.
 
 - SHA-512:
 
@@ -72,50 +72,42 @@ c. Các module chính
 ⚙️ Công nghệ: Flask, cryptography, base64, hashlib, SQLAlchemy, uuid.
 
 d. Thử nghiệm & kết quả
-Thử nghiệm thành công với nhiều tập tin song.mp3 dung lượng 1–20 MB.
+- Thử nghiệm thành công với nhiều tập tin song.mp3 dung lượng 1–20 MB.
 
-Giao diện người gửi nhập metadata, hệ thống tạo gói tin mã hóa đúng đặc tả.
+- Giao diện người gửi nhập metadata, hệ thống tạo gói tin mã hóa đúng đặc tả.
 
-Giao diện người nhận hiển thị trạng thái xác minh: Đã nhận, Đã xác thực, hoặc Sai hash.
+- Giao diện người nhận hiển thị trạng thái xác minh: Đã nhận, Đã xác thực, hoặc Sai hash.
 
-Thử cố ý sai hash/chữ ký → hệ thống từ chối và gửi phản hồi NACK.
+- Thử cố ý sai hash/chữ ký → hệ thống từ chối và gửi phản hồi NACK.
 
-Hệ thống giải mã đúng file gốc, bảo toàn toàn vẹn và xác thực.
+- Hệ thống giải mã đúng file gốc, bảo toàn toàn vẹn và xác thực.
 
 
 3. CÁCH CÀI ĐẶT VÀ CHẠY
 a. Yêu cầu
 Python ≥ 3.8
 
-Các thư viện:
+- Các thư viện:
 
-cryptography
-
-flask
-
-flask_sqlalchemy
-
-uuid, hashlib, base64
+  + cryptography
+  
+  + flask
+  
+  + flask_sqlalchemy
+  
+  + uuid, hashlib, base64
 
 b. Cài đặt và chạy
-Cài thư viện
+- Cài thư viện
 
-bash
-Sao chép
-Chỉnh sửa
 pip install cryptography flask flask_sqlalchemy
-Chạy server Flask
+- Chạy server Flask
 
-bash
-Sao chép
-Chỉnh sửa
+
 python main.py
-Truy cập giao diện
+- Truy cập giao diện
 Mở trình duyệt và truy cập:
 
-cpp
-Sao chép
-Chỉnh sửa
 http://127.0.0.1:5000
 → Chọn vai trò người gửi/người nhận để bắt đầu truyền file bảo mật.
 
