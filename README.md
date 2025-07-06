@@ -111,7 +111,9 @@ b. Cài đặt và chạy
 
 - Truy cập giao diện
 Mở trình duyệt và truy cập:
+   ```powershell
+   http://127.0.0.1:5000
+   ```
 
-http://127.0.0.1:5000
 → Chọn vai trò người gửi/người nhận để bắt đầu truyền file bảo mật.
 
