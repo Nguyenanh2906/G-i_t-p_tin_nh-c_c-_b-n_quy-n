@@ -5,33 +5,32 @@ Trong thời đại chuyển đổi số, việc truyền tải nội dung số 
 
 Đề tài này xây dựng một hệ thống truyền tập tin nhạc có bản quyền với các mục tiêu chính:
 
-Bảo mật nội dung tập tin nhạc bằng thuật toán Triple DES.
+- Bảo mật nội dung tập tin nhạc bằng thuật toán Triple DES.
 
-Bảo vệ metadata (tên bài, bản quyền) bằng mã hóa DES.
+- Bảo vệ metadata (tên bài, bản quyền) bằng mã hóa DES.
 
-Xác thực người gửi bằng chữ ký số RSA 1024-bit (OAEP + SHA-512).
+- Xác thực người gửi bằng chữ ký số RSA 1024-bit (OAEP + SHA-512).
 
-Đảm bảo toàn vẹn dữ liệu bằng hàm băm SHA-512.
+- Đảm bảo toàn vẹn dữ liệu bằng hàm băm SHA-512.
 
-Hệ thống mô phỏng mô hình truyền dữ liệu giữa nhà phát triển và nền tảng phát nhạc.
+- Hệ thống mô phỏng mô hình truyền dữ liệu giữa nhà phát triển và nền tảng phát nhạc.
 
 2. TRÌNH BÀY KỸ THUẬT
 a. Kiến trúc hệ thống
-Mô hình: Client – Server đơn giản mô phỏng vai trò:
+- Mô hình: Client – Server đơn giản mô phỏng vai trò:
 
-Người gửi (Developer): chọn file, mã hóa, ký số và gửi.
+ - Người gửi (Developer): chọn file, mã hóa, ký số và gửi.
+ 
+ - Người nhận (Receiver): kiểm tra hash, xác thực chữ ký và giải mã.
 
-Người nhận (Receiver): kiểm tra hash, xác thực chữ ký và giải mã.
+- Luồng xử lý:
 
-Luồng xử lý:
+ - Handshake: gửi "Hello!", nhận "Ready!".
+ 
+ - Trao đổi khóa: gửi khóa phiên Triple DES đã mã hóa bằng RSA.
+ 
+ - Gửi gói tin: chứa file mã hóa, metadata mã hóa, chữ ký, hash, khóa mã hóa.
 
-Handshake: gửi "Hello!", nhận "Ready!".
-
-Trao đổi khóa: gửi khóa phiên Triple DES đã mã hóa bằng RSA.
-
-Gửi gói tin: chứa file mã hóa, metadata mã hóa, chữ ký, hash, khóa mã hóa.
-
-<p align="center"> <img src="ANH/so_do_hoat_dong_chi_tiet.png" alt="Sơ đồ hoạt động" width="380px" height="280px"/> <img src="ANH/bieu_do_tong_the.png" alt="Biểu đồ tổng thể" width="400px" height="280px"/> </p>
 b. Thành phần kỹ thuật
 Triple DES (3DES):
 
@@ -59,7 +58,6 @@ SHA-512:
 
 Băm dữ liệu (IV || ciphertext) để tạo hash kiểm tra toàn vẹn khi nhận.
 
-<p align="center"> <img src="ANH/so_do_luong_du_lieu.png" alt="Luồng dữ liệu" width="300px" height="300px"/> <img src="ANH/luong_du_lieu_gui_nhan.png" alt="Dữ liệu gửi/nhận" width="290px" height="300px"/> </p>
 c. Các module chính
 crypto_utils.py: Xử lý mã hóa DES, Triple DES, ký số RSA, sinh khóa, tính hash SHA-512.
 
@@ -82,7 +80,7 @@ Thử cố ý sai hash/chữ ký → hệ thống từ chối và gửi phản h
 
 Hệ thống giải mã đúng file gốc, bảo toàn toàn vẹn và xác thực.
 
-<p align="center"> <img src="ANH/kq_sender.png" alt="Giao diện gửi tập tin" width="500px" height="300px"/> <img src="ANH/kq_receiver.png" alt="Giao diện nhận và xác minh" width="500px" height="300px"/> </p>
+
 3. CÁCH CÀI ĐẶT VÀ CHẠY
 a. Yêu cầu
 Python ≥ 3.8
