@@ -17,6 +17,7 @@ Trong thời đại chuyển đổi số, việc truyền tải nội dung số 
 - Hệ thống mô phỏng mô hình truyền dữ liệu giữa nhà phát triển và nền tảng phát nhạc.
 
 2. TRÌNH BÀY KỸ THUẬT
+   
 a. Kiến trúc hệ thống
 - Mô hình: Client – Server đơn giản mô phỏng vai trò:
 
@@ -33,40 +34,40 @@ a. Kiến trúc hệ thống
     + Gửi gói tin: chứa file mã hóa, metadata mã hóa, chữ ký, hash, khóa mã hóa.
 
 b. Thành phần kỹ thuật
-Triple DES (3DES):
+- Triple DES (3DES):
 
-Mã hóa đối xứng 3 vòng, sử dụng CBC mode và padding PKCS7.
+  + Mã hóa đối xứng 3 vòng, sử dụng CBC mode và padding PKCS7.
+  
+  + Tạo IV ngẫu nhiên cho mỗi lần mã hóa file.
 
-Tạo IV ngẫu nhiên cho mỗi lần mã hóa file.
+- Mã hóa metadata bằng DES:
 
-Mã hóa metadata bằng DES:
+  + Metadata gồm: tên file, tên nghệ sĩ, năm phát hành.
+  
+  + Dùng khóa DES 64-bit riêng để mã hóa riêng biệt phần thông tin bản quyền.
 
-Metadata gồm: tên file, tên nghệ sĩ, năm phát hành.
-
-Dùng khóa DES 64-bit riêng để mã hóa riêng biệt phần thông tin bản quyền.
-
-RSA 1024-bit + OAEP:
+- RSA 1024-bit + OAEP:
 
 RSA được dùng để:
 
-Mã hóa session key (Triple DES key).
-
-Ký số metadata sau khi băm bằng SHA-512.
+  + Mã hóa session key (Triple DES key).
+  
+  + Ký số metadata sau khi băm bằng SHA-512.
 
 Sử dụng OAEP + SHA-512 tăng cường chống phân tích.
 
-SHA-512:
+- SHA-512:
 
-Băm dữ liệu (IV || ciphertext) để tạo hash kiểm tra toàn vẹn khi nhận.
+  + Băm dữ liệu (IV || ciphertext) để tạo hash kiểm tra toàn vẹn khi nhận.
 
 c. Các module chính
-crypto_utils.py: Xử lý mã hóa DES, Triple DES, ký số RSA, sinh khóa, tính hash SHA-512.
+- crypto_utils.py: Xử lý mã hóa DES, Triple DES, ký số RSA, sinh khóa, tính hash SHA-512.
 
-secure_protocol.py: Định nghĩa quy trình đóng gói/gỡ gói bảo mật, handshake, ACK/NACK.
+- secure_protocol.py: Định nghĩa quy trình đóng gói/gỡ gói bảo mật, handshake, ACK/NACK.
 
-app.py: Xây dựng giao diện người gửi/người nhận bằng Flask, định tuyến URL.
+- app.py: Xây dựng giao diện người gửi/người nhận bằng Flask, định tuyến URL.
 
-main.py: Khởi tạo ứng dụng, tạo CSDL và chạy server Flask.
+- main.py: Khởi tạo ứng dụng, tạo CSDL và chạy server Flask.
 
 ⚙️ Công nghệ: Flask, cryptography, base64, hashlib, SQLAlchemy, uuid.
 
