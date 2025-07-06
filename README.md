@@ -99,6 +99,9 @@ Python ≥ 3.8
 
 b. Cài đặt và chạy
 - Cài thư viện
+   ```powershell
+pip install cryptography flask flask_sqlalchemy
+   ```
 
 pip install cryptography flask flask_sqlalchemy
 - Chạy server Flask
