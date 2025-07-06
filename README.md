@@ -1,6 +1,7 @@
 # Gui_tap_tin_nhac_co_ban_quyen
  Một nhà phát triển ứng dụng âm nhạc gửi file song.mp3 đến nền tảng phát trực tuyến, kèm metadata bản quyền được  mã hóa riêng để bảo vệ quyền sở hữu. File được mã hóa bằng Triple DES và ký số để đảm bảo an toàn, với tính toàn  vẹn được kiểm tra để ngăn chặn giả mạo.
 1. GIỚI THIỆU
+
 Trong thời đại chuyển đổi số, việc truyền tải nội dung số như âm nhạc cần đảm bảo các yếu tố về bản quyền, bảo mật và xác thực. Nếu không có các biện pháp bảo vệ, file nhạc có thể bị đánh cắp, chỉnh sửa hoặc phát tán trái phép.
 
 Đề tài này xây dựng một hệ thống truyền tập tin nhạc có bản quyền với các mục tiêu chính:
@@ -19,17 +20,17 @@ Trong thời đại chuyển đổi số, việc truyền tải nội dung số 
 a. Kiến trúc hệ thống
 - Mô hình: Client – Server đơn giản mô phỏng vai trò:
 
- - Người gửi (Developer): chọn file, mã hóa, ký số và gửi.
- 
- - Người nhận (Receiver): kiểm tra hash, xác thực chữ ký và giải mã.
+  + Người gửi (Developer): chọn file, mã hóa, ký số và gửi.
+   
+  + Người nhận (Receiver): kiểm tra hash, xác thực chữ ký và giải mã.
 
 - Luồng xử lý:
 
- - Handshake: gửi "Hello!", nhận "Ready!".
+    + Handshake: gửi "Hello!", nhận "Ready!".
  
- - Trao đổi khóa: gửi khóa phiên Triple DES đã mã hóa bằng RSA.
+    + Trao đổi khóa: gửi khóa phiên Triple DES đã mã hóa bằng RSA.
  
- - Gửi gói tin: chứa file mã hóa, metadata mã hóa, chữ ký, hash, khóa mã hóa.
+    + Gửi gói tin: chứa file mã hóa, metadata mã hóa, chữ ký, hash, khóa mã hóa.
 
 b. Thành phần kỹ thuật
 Triple DES (3DES):
